@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greyn Art | Digital Illustrator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                        darkest: '#010101',
+                        neonpink: '#ff2a6d',
+                        neonred: '#ff003c',
+                        neonblue: '#05d9e8',
+                        neonpurple: '#d300c5',
+                    },
+                    fontFamily: {
+                        sans: ['"Exo 2"', 'sans-serif'],
+                        mono: ['"Major Mono Display"', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 6s infinite cubic-bezier(0.4, 0, 0.6, 1)',
+                        'float': 'float 6s ease-in-out infinite',
+                        'neon-flicker': 'neon-flicker 1.5s infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'neon-flicker': {
+                            '0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': {
+                                'text-shadow': '0 0 5px #ff2a6d, 0 0 10px #ff2a6d',
+                                'box-shadow': '0 0 5px #ff2a6d, 0 0 10px #ff2a6d',
+                            },
+                            '20%, 24%, 55%': {
+                                'text-shadow': 'none',
+                                'box-shadow': 'none',
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=Major+Mono+Display&display=swap');
+        
+        body {
+            background-color: #0a0a0a;
+            color: #f1f1f1;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 5px #ff2a6d, 0 0 10px #ff2a6d;
+        }
+        
+        .neon-text-blue {
+            text-shadow: 0 0 5px #05d9e8, 0 0 10px #05d9e8;
+        }
+        
+        .neon-text-purple {
+            text-shadow: 0 0 5px #d300c5, 0 0 10px #d300c5;
+        }
+        
+        .neon-border {
+            box-shadow: 0 0 5px #ff2a6d, 0 0 10px #ff2a6d;
+        }
+        
+        .neon-border-blue {
+            box-shadow: 0 0 5px #05d9e8, 0 0 10px #05d9e8;
+        }
+        
+        .neon-hover:hover {
+            text-shadow: 0 0 5px #ff2a6d, 0 0 10px #ff2a6d;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,42,109,0.2) 0%, rgba(5,217,232,0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.8);
+            padding: 10px;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            bottom: 0;
+        }
+           
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.show {
+            opacity: 1;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .lightbox.show .lightbox-content {
+            transform: scale(1);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            color: #ff2a6d;
+            transform: rotate(90deg);
+        }
+        
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ff2a6d, #05d9e8, transparent);
+            margin: 60px auto;
+            width: 80%;
+        }
+        
+        input, textarea, select {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #ff2a6d;
+            box-shadow: 0 0 5px #ff2a6d, 0 0 10px #ff2a6d;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 100;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: #050505;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid #ff2a6d;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #ff2a6d;
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: #05d9e8;
+            bottom: 10%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+        
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: #d300c5;
+            top: 50%;
+            right: 15%;
+            animation: float 7s ease-in-out infinite 2s;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .commission-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, rgba(10,10,10,0.8) 0%, rgba(5,5,5,0.9) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .commission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255,42,109,0.2);
+            border-color: rgba(255,42,109,0.3);
+        }
+        
+        .commission-card.featured {
+            border: 1px solid rgba(255,42,109,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .commission-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #ff2a6d;
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,42,109,0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #ff2a6d;
+            transform: translateY(-5px);
+        }
+        
+        .process-step {
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(10, 10, 10, 0.7);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 42, 109, 0.2);
+        }
+        
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, #ff2a6d, #05d9e8);
+            transition: height 0.5s ease;
+        }
+        
+        .process-step:hover::before {
+            height: 100%;
+        }
+        
+        .nsfw-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff003c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 3;
+        }
+        
+        .commission-status {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.9);
+            border: 1px solid #ff2a6d;
+            border-radius: 20px;
+            padding: 10px 20px;
+            box-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
+            display: flex;
+            align-items: center;
+        }
+        
+        .commission-status.open {
+            border-color: #05d9e8;
+            box-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-dot.open {
+            background-color: #05d9e8;
+            box-shadow: 0 0 10px #05d9e8;
+        }
+        
+        .status-dot.closed {
+            background-color: #ff003c;
+            box-shadow: 0 0 10px #ff003c;
+        }
+        
+        .profile-header {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .profile-banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+        
+        .profile-content {
+            position: relative;
+            margin-top: -80px;
+            z-index: 10;
+            padding: 0 20px;
+        }
+        
+        .profile-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 5px solid #0a0a0a;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            object-fit: cover;
+            background-color: #050505;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff2a6d;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 2.5rem;
+            }
+            
+            .shape-1, .shape-2, .shape-3 {
+                display: none;
+            }
+            
+            .gallery-caption {
+                bottom: 0;
+                opacity: 1;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+            }
+            
+            .commission-status {
+                top: 70px;
+                right: 10px;
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+            
+            .profile-header {
+                height: 300px;
+            }
+            
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-content {
+                margin-top: -60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Commission Status Indicator -->
+    <div class="commission-status animate__animated animate__fadeInDown animate__delay-1s">
+        <div class="status-dot open"></div>
+        <span>Commissions: open</span>
+    </div>
+
+    <!-- Floating background shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    
+    <!-- Scroll progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up text-white"></i>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-darker/90 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="font-mono text-xl font-bold neon-text animate__animated animate__fadeIn">GREYN</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link animate__animated animate__fadeIn animate__delay-1s">Home</a>
+                <a href="#gallery" class="nav-link animate__animated animate__fadeIn animate__delay-1s">Gallery</a>
+                <a href="#process" class="nav-link animate__animated animate__fadeIn animate__delay-1s">Process</a>
+                <a href="#about" class="nav-link animate__animated animate__fadeIn animate__delay-1s">About</a>
+                <a href="#commissions" class="nav-link animate__animated animate__fadeIn animate__delay-1s">Commissions</a>
+                <a href="#contact" class="nav-link animate__animated animate__fadeIn animate__delay-1s">Contact</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none" id="menuToggle">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="md:hidden fixed top-16 right-0 w-64 bg-darker/95 backdrop-blur-md border-l border-b border-gray-800 z-50 hidden transform translate-x-full transition-transform duration-300" id="mobileMenu">
+        <div class="flex flex-col p-4 space-y-4">
+            <a href="#home" class="nav-link py-2">Home</a>
+            <a href="#gallery" class="nav-link py-2">Gallery</a>
+            <a href="#process" class="nav-link py-2">Process</a>
+            <a href="#about" class="nav-link py-2">About</a>
+            <a href="#commissions" class="nav-link py-2">Commissions</a>
+            <a href="#contact" class="nav-link py-2">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section - Redesigned as Social Profile -->
+    <section id="home" class="relative overflow-hidden">
+        <div class="profile-header">
+            <img src="https://portoliogreyenm.carrd.co/assets/images/gallery01/ef091d80_original.jpg?v=49a96c13" alt="Profile Banner" class="profile-banner">
+        </div>
+        
+        <div class="profile-content container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-start md:items-end gap-6">
+                <div class="flex-shrink-0">
+                    <img src="https://portoliogreyenm.carrd.co/assets/images/image01.jpg?v=49a96c13" alt="Profile Picture" class="profile-avatar">
+                </div>
+                
+                <div class="flex-grow">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2">Greyn Art</h1>
+                    <p class="text-lg text-gray-300 mb-4">Digital illustrator specializing in vibrant characters and futuristic atmospheres</p>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1+</div>
+                            <div class="stat-label">Years of experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Artworks created</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2+</div>
+                            <div class="stat-label">Satisfied clients</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#gallery" class="inline-block bg-neonred hover:bg-neonpink text-white font-bold py-3 px-6 rounded-full transition duration-300 neon-border hover:animate-pulse">
+                            View Gallery
+                        </a>
+                        <a href="#commissions" class="inline-block bg-transparent border border-neonblue text-neonblue hover:bg-neonblue/10 font-bold py-3 px-6 rounded-full transition duration-300 neon-border-blue">
+                            Commissions
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex space-x-6">
+                <a href="https://instagram.com/greyn_art" target="_blank" class="social-icon text-2xl text-neonpink hover:text-white">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com/greyn_art" target="_blank" class="social-icon text-2xl text-neonblue hover:text-white">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://discord.com/users/565679376646012928" target="_blank" class="social-icon text-2xl text-indigo-400 hover:text-white">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-darker/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Gallery</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Explore my portfolio of digital illustrations, fanarts and commissions</p>
+            </div>
+            
+            <!-- Gallery Navigation -->
+            <div class="flex flex-wrap justify-center mb-12 gap-2 animate__animated animate__fadeIn">
+                <button class="gallery-filter px-4 py-2 rounded-full bg-neonred text-white font-medium" data-category="all">All</button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonred text-neonred hover:bg-neonred hover:text-white transition font-medium" data-category="fanarts">Fanarts</button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonblue text-neonblue hover:bg-neonblue hover:text-white transition font-medium" data-category="ocs">OCs</button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonpurple text-neonpurple hover:bg-neonpurple hover:text-white transition font-medium" data-category="commissions">Commissions</button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-white transition font-medium" data-category="chibi">Chibi</button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition font-medium" data-category="nsfw">NSFW</button>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                <!-- Fanart 1 -->
+                <div class="gallery-item fanarts" data-src="">
+                    <img src="" alt="Fanart 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Fanart</p>
+                        <p class="text-gray-300 text-sm">Character X</p>
+                    </div>
+                </div>
+                
+                <!-- OC 1 -->
+                <div class="gallery-item ocs" data-src="">
+                    <img src="" alt="Original Character 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">OC</p>
+                        <p class="text-gray-300 text-sm">Aurora</p>
+                    </div>
+                </div>
+                
+                <!-- Commission 1 -->
+                <div class="gallery-item commissions" data-src="">
+                    <img src="" alt="Commission 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Commission</p>
+                        <p class="text-gray-300 text-sm">Client A</p>
+                    </div>
+                </div>
+                
+                <!-- Fanart 2 -->
+                <div class="gallery-item fanarts" data-src="">
+                   <img src="" alt="Fanart 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Fanart</p>
+                        <p class="text-gray-300 text-sm">Character Y</p>
+                    </div>
+                </div>
+                
+                <!-- OC 2 -->
+                <div class="gallery-item ocs" data-src="">
+                    <img src="" alt="Original Character 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">OC</p>
+                        <p class="text-gray-300 text-sm">Specter</p>
+                    </div>
+                </div>
+                
+                <!-- Commission 2 -->
+                <div class="gallery-item commissions" data-src="">
+                    <img src="" alt="Commission 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Commission</p>
+                        <p class="text-gray-300 text-sm">Client B</p>
+                    </div>
+                </div>
+                
+                <!-- Chibi 1 -->
+                <div class="gallery-item chibi" data-src="">
+                    <img src="" alt="Chibi Character" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Chibi</p>
+                        <p class="text-gray-300 text-sm">Cute Character</p>
+                    </div>
+                </div>
+                
+                <!-- NSFW 1 -->
+                <div class="gallery-item nsfw" data-src="">
+                    <div class="nsfw-badge">NSFW</div>
+                    <img src="" alt="NSFW Art" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">NSFW</p>
+                        <p class="text-gray-300 text-sm">Adult Content</p>
+                    </div>
+                </div>
+                
+                <!-- Chibi 2 -->
+                <div class="gallery-item chibi" data-src="">
+                    <img src="" alt="Chibi Character 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Chibi</p>
+                        <p class="text-gray-300 text-sm">Cute Character 2</p>
+                    </div>
+                </div>
+                
+                <!-- NSFW 2 -->
+                <div class="gallery-item nsfw" data-src="">
+                    <div class="nsfw-badge">NSFW</div>
+                    <img src="" alt="NSFW Art 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">NSFW</p>
+                        <p class="text-gray-300 text-sm">Adult Content 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- Art Process Section -->
+    <section id="process" class="py-20 bg-darker/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Creative Process</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">From initial sketch to finished artwork</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-4 gap-6 process-steps">
+                    <!-- Step 1 -->
+                    <div class="process-step">
+                        <div class="text-neonpink text-4xl mb-4">1</div>
+                        <h3 class="text-xl font-bold mb-2 text-neonpink">Sketch</h3>
+                        <p class="text-gray-300">Definition of composition and basic shapes of the drawing with loose and gestural lines.</p>
+                        <div class="mt-4">
+                            <img src="" alt="Sketch" class="w-full h-auto rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="process-step">
+                        <div class="text-neonblue text-4xl mb-4">2</div>
+                        <h3 class="text-xl font-bold mb-2 text-neonblue">Lineart</h3>
+                        <p class="text-gray-300">Refinement of lines, definition of contours and details with precise strokes.</p>
+                        <div class="mt-4">
+                            <img src="" alt="Lineart" class="w-full h-auto rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="process-step">
+                        <div class="text-neonpurple text-4xl mb-4">3</div>
+                        <h3 class="text-xl font-bold mb-2 text-neonpurple">Base Colors</h3>
+                        <p class="text-gray-300">Application of base colors, palette definition and layer separation by elements.</p>
+                        <div class="mt-4">
+                            <img src="" alt="Base Colors" class="w-full h-auto rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="process-step">
+                        <div class="text-neonred text-4xl mb-4">4</div>
+                        <h3 class="text-xl font-bold mb-2 text-neonred">Final Render</h3>
+                        <p class="text-gray-300">Application of shadows, lights, textures and special effects to finalize the artwork.</p>
+                        <div class="mt-4">
+                            <img src="" alt="Final Render" class="w-full h-auto rounded-lg">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-gray-900/50 p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4 text-neonblue">Techniques & Tools</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-bold mb-2 text-neonpink">Digital Process</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>Use of separate layers for each element</li>
+                                <li>Digital painting method with custom brushes</li>
+                                <li>Use of blending modes for special effects</li>
+                                <li>Color correction and post-production adjustments</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold mb-2 text-neonpurple">Tools</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>ibis Paint for illustration and painting</li>
+                                <li>Adobe Illustrator for vectorization</li>
+                                <li>Krita for digital painting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">About the Artist</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Learn more about me and my creative process</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3 flex justify-center animate__animated animate__fadeInLeft">
+                    <div class="relative">
+                        <img src="https://media.discordapp.net/attachments/1029143960968495136/1372138151602294814/43_Sem_Titulo.png?ex=6825aebc&is=68245d3c&hm=73243448822a106d264f1febdc27af5f80f16f66a0ac2be0a2c399963c5fd143&=&format=webp&quality=lossless&width=614&height=614" alt="Greyn" class="rounded-lg max-h-[500px] border-2 border-gray-800 hover:border-neonblue transition-all duration-300">
+                        <div class="absolute -inset-2 rounded-lg bg-neonblue/20 blur-lg z-[-1] animate-pulse-slow"></div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/3 animate__animated animate__fadeInRight">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-neonpink">Biography</h3>
+                        <p class="text-gray-300 mb-6">
+                            I'm Greyn, a Brazilian digital illustrator with 2 years of experience, working professionally since early 2024.
+                            I've always drawn since childhood, starting traditionally, but found myself in digital. I enjoy creating striking characters and expressive scenes, combining influences from anime, cyberpunk and concept art. I have a special love for vibrant, saturated and neon colors.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-neonblue">Style & Influences</h3>
+                        <p class="text-gray-300 mb-6">
+                            My style combines vibrant colors, striking lighting and attention to detail to create immersive scenes.
+                            I'm influenced by artists like Krenz, Khyle, Nyantcha and Lalansane who influence my work,
+                            Although I'm still refining my current style, I'm always looking to step out of my comfort zone and explore new possibilities.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-neonpurple">Tools</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                            <div class="flex items-center tooltip">
+                                <i class="fas fa-paint-brush text-neonred mr-2"></i>
+                                <span class="text-gray-300">ibis Paint</span>
+                                <span class="tooltip-text">Main illustration software</span>
+                            </div>
+                            <div class="flex items-center tooltip">
+                                <i class="fas fa-palette text-neonred mr-2"></i>
+                                <span class="text-gray-300">Adobe Illustrator</span>
+                                <span class="tooltip-text">For vectorization and design</span>
+                            </div>
+                            <div class="flex items-center tooltip">
+                                <i class="fas fa-tablet-alt text-neonred mr-2"></i>
+                                <span class="text-gray-300">Krita</span>
+                                <span class="tooltip-text">For digital painting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Commissions Section -->
+    <section id="commissions" class="py-20 bg-darker/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Commissions</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Order your custom artwork</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <!-- Sketch Commission -->
+                    <div class="commission-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2 text-neonpink">Sketch</h3>
+                        <p class="text-gray-400 text-sm mb-4">Quick black and white drawing</p>
+                        <p class="text-2xl font-bold mb-4">$15-30</p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonpink mr-2"></i>
+                                <span>Clean lines</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonpink mr-2"></i>
+                                <span>1 Character</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonpink mr-2"></i>
+                                <span>No background</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-block w-full bg-transparent border border-neonpink text-neonpink hover:bg-neonpink hover:text-white text-center font-bold py-2 px-4 rounded transition duration-300">
+                            Order
+                        </a>
+                    </div>
+                    
+                    <!-- Flat Color Commission -->
+                    <div class="commission-card featured p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2 text-neonblue">Flat Color</h3>
+                        <p class="text-gray-400 text-sm mb-4">Art with flat colors</p>
+                        <p class="text-2xl font-bold mb-4">$30-60</p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonblue mr-2"></i>
+                                <span>Clean lines</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonblue mr-2"></i>
+                                <span>1-2 Characters</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonblue mr-2"></i>
+                                <span>Simple background</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonblue mr-2"></i>
+                                <span>1 Revision</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-block w-full bg-neonblue hover:bg-neonblue/90 text-white text-center font-bold py-2 px-4 rounded transition duration-300">
+                            Order
+                        </a>
+                    </div>
+                    
+                    <!-- Full Render Commission -->
+                    <div class="commission-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2 text-neonpurple">Full Render</h3>
+                        <p class="text-gray-400 text-sm mb-4">Fully finished artwork</p>
+                        <p class="text-2xl font-bold mb-4">$60-120</p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonpurple mr-2"></i>
+                                <span>Complete render</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonpurple mr-2"></i>
+                                <span>Up to 3 characters</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonpurple mr-2"></i>
+                                <span>Detailed background</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neonpurple mr-2"></i>
+                                <span>Up to 3 revisions</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-block w-full bg-transparent border border-neonpurple text-neonpurple hover:bg-neonpurple hover:text-white text-center font-bold py-2 px-4 rounded transition duration-300">
+                            Order
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900/50 p-6 rounded-lg mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-neonpink">Terms of Service</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-bold mb-2 text-neonblue">Process</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>Payment via PayPal (50% upfront, 50% on delivery)</li>
+                                <li>Delivery time: 1-4 weeks depending on complexity</li>
+                                <li>Up to 3 free revisions (varies by package)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold mb-2 text-neonpurple">Rights</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>Personal use only (commercial license available for +50%)</li>
+                                <li>I retain copyright of the artwork</li>
+                                <li>You have right to use for personal purposes</li>
+                                <li>I may refuse any request that goes against my principles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <a href="#contact" class="inline-block bg-neonred hover:bg-neonpink text-white font-bold py-3 px-6 rounded-full transition duration-300 neon-border hover:animate-pulse">
+                        Request Commission
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Contact</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Get in touch for commissions or collaborations</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <form id="contactForm" action="https://formspree.io/f/mzzrrylk" method="POST" class="space-y-6 mb-12 animate__animated animate__fadeIn">
+                    <div>
+                        <label for="name" class="block text-gray-300 mb-2">Name *</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-gray-300 mb-2">Email *</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink">
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                        <select id="subject" name="subject" class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink">
+                            <option value="commission">Commission</option>
+                            <option value="collab">Collaboration</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-gray-300 mb-2">Message *</label>
+                        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink"></textarea>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="agree" name="agree" required class="mr-2 rounded focus:ring-neonpink">
+                        <label for="agree" class="text-gray-300 text-sm">I agree with the Terms of Service and Privacy Policy</label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-neonred hover:bg-neonpink text-white font-bold py-3 px-6 rounded-full transition duration-300 neon-border hover:animate-pulse flex items-center justify-center">
+                        <span id="submitText">Send Message</span>
+                        <i class="fas fa-paper-plane ml-2" id="submitIcon"></i>
+                        <i class="fas fa-spinner fa-spin ml-2 hidden" id="submitSpinner"></i>
+                    </button>
+                </form>
+                
+                <div class="text-center animate__animated animate__fadeIn animate__delay-1s">
+                    <h3 class="text-xl font-bold mb-4 text-neonpink">Or find me on social media</h3>
+                    
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://instagram.com/greyn_art" target="_blank" class="social-icon text-3xl text-neonpink hover:text-white tooltip">
+                            <i class="fab fa-instagram"></i>
+                            <span class="tooltip-text">Instagram</span>
+                        </a>
+                        <a href="https://twitter.com/greyn_art" target="_blank" class="social-icon text-3xl text-neonblue hover:text-white tooltip">
+                            <i class="fab fa-twitter"></i>
+                            <span class="tooltip-text">Twitter</span>
+                        </a>
+                        <a href="https://discord.com/users/565679376646012928" target="_blank" class="social-icon text-3xl text-indigo-400 hover:text-white tooltip">
+                            <i class="fab fa-discord"></i>
+                            <span class="tooltip-text">Discord</span>
+                        </a>
+                    </div>
+                    
+                    <p class="mt-6 text-gray-400">
+                        Direct email: <a href="mailto:greyenm@gmail.com" class="text-neonblue hover:underline">greyenm@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-darker border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="font-mono text-xl font-bold neon-text">GREYN</a>
+                    <p class="text-gray-500 text-sm mt-1">Illustrations and design by Greyn</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-neonpink transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-neonblue transition">Privacy Policy</a>
+                    <a href="#contact" class="text-gray-400 hover:text-neonpurple transition">Contact</a>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center md:text-left">
+                <p class="text-gray-400">© 2025 Greyn Art. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('translate-x-full');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            });
+        });
+
+        // Gallery filter
+        const filterButtons = document.querySelectorAll('.gallery-filter');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('bg-neonred', 'bg-neonblue', 'bg-neonpurple', 'bg-yellow-400', 'bg-red-500', 'text-white');
+                    btn.classList.add('bg-transparent', 'border');
+                    
+                    if(btn.classList.contains('border-neonred')) {
+                        btn.classList.add('text-neonred', 'hover:bg-neonred');
+                    } else if(btn.classList.contains('border-neonblue')) {
+                        btn.classList.add('text-neonblue', 'hover:bg-neonblue');
+                    } else if(btn.classList.contains('border-neonpurple')) {
+                        btn.classList.add('text-neonpurple', 'hover:bg-neonpurple');
+                    } else if(btn.classList.contains('border-yellow-400')) {
+                        btn.classList.add('text-yellow-400', 'hover:bg-yellow-400');
+                    } else if(btn.classList.contains('border-red-500')) {
+                        btn.classList.add('text-red-500', 'hover:bg-red-500');
+                    }
+                });
+                
+                // Set active button styles based on its color
+                if(this.classList.contains('border-neonred')) {
+                    this.classList.remove('bg-transparent', 'text-neonred', 'hover:bg-neonred');
+                    this.classList.add('bg-neonred', 'text-white');
+                } else if(this.classList.contains('border-neonblue')) {
+                    this.classList.remove('bg-transparent', 'text-neonblue', 'hover:bg-neonblue');
+                    this.classList.add('bg-neonblue', 'text-white');
+                } else if(this.classList.contains('border-neonpurple')) {
+                    this.classList.remove('bg-transparent', 'text-neonpurple', 'hover:bg-neonpurple');
+                    this.classList.add('bg-neonpurple', 'text-white');
+                } else if(this.classList.contains('border-yellow-400')) {
+                    this.classList.remove('bg-transparent', 'text-yellow-400', 'hover:bg-yellow-400');
+                    this.classList.add('bg-yellow-400', 'text-white');
+                } else if(this.classList.contains('border-red-500')) {
+                    this.classList.remove('bg-transparent', 'text-red-500', 'hover:bg-red-500');
+                    this.classList.add('bg-red-500', 'text-white');
+                }
+                
+                // Filter items
+                const category = this.dataset.category;
+                
+                galleryItems.forEach(item => {
+                    if (category === 'all' || item.classList.contains(category)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const src = this.dataset.src;
+                lightboxImg.src = src;
+                lightbox.style.display = 'flex';
+                setTimeout(() => {
+                    lightbox.classList.add('show');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        lightboxClose.addEventListener('click', function() {
+            lightbox.classList.remove('show');
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+            }, 300);
+            document.body.style.overflow = 'auto';
+        });
+        
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('show');
+                setTimeout(() => {
+                    lightbox.style.display = 'none';
+                }, 300);
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // Show loading state
+            const submitText = document.getElementById('submitText');
+            const submitIcon = document.getElementById('submitIcon');
+            const submitSpinner = document.getElementById('submitSpinner');
+            
+            submitText.textContent = 'Sending...';
+            submitIcon.classList.add('hidden');
+            submitSpinner.classList.remove('hidden');
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollProgress + '%';
+            
+            // Show/hide back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Back to top button
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('translate-x-full')) {
+                        mobileMenu.classList.add('translate-x-full');
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
+                    }
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList.item(1);
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
