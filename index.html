@@ -640,7 +640,7 @@
     <!-- Hero Section - Redesigned as Social Profile -->
     <section id="home" class="relative overflow-hidden">
         <div class="profile-header">
-            <img src="https://portoliogreyenm.carrd.co/assets/images/gallery01/ef091d80_original.jpg?v=49a96c13" alt="Profile Banner" class="profile-banner">
+            <img src="https://i.pinimg.com/736x/26/94/85/269485338d3d3e68e88535023f6106d4.jpg" alt="Profile Banner" class="profile-banner">
         </div>
         
         <div class="profile-content container mx-auto px-4">
@@ -702,74 +702,61 @@
             </div>
             
             <!-- Gallery Navigation -->
-            <div class="flex flex-wrap justify-center mb-12 gap-2 animate__animated animate__fadeIn">
+           <div class="flex flex-wrap justify-center mb-12 gap-2 animate__animated animate__fadeIn">
                 <button class="gallery-filter px-4 py-2 rounded-full bg-neonred text-white font-medium" data-category="all">All</button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonred text-neonred hover:bg-neonred hover:text-white transition font-medium" data-category="fanarts">Fanarts</button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonblue text-neonblue hover:bg-neonblue hover:text-white transition font-medium" data-category="ocs">OCs</button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonpurple text-neonpurple hover:bg-neonpurple hover:text-white transition font-medium" data-category="commissions">Commissions</button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-white transition font-medium" data-category="chibi">Chibi</button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition font-medium" data-category="nsfw">NSFW</button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonred text-neonred hover:bg-neonred hover:text-white transition font-medium" data-category="fanarts">Fanarts </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonblue text-neonblue hover:bg-neonblue hover:text-white transition font-medium" data-category="ocs">OCs </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonpurple text-neonpurple hover:bg-neonpurple hover:text-white transition font-medium" data-category="commissions">Commissions </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-white transition font-medium" data-category="chibi">Chibi </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition font-medium" data-category="nsfw">NSFW </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white transition font-medium" data-category="illustrations">Illustrations </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-green-400 text-green-400 hover:bg-green-400 hover:text-white transition font-medium" data-category="concept">Concept Art </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-pink-400 text-pink-400 hover:bg-pink-400 hover:text-white transition font-medium" data-category="sketches">Sketches </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white transition font-medium" data-category="promo">Promo Art </button>
+                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-white transition font-medium" data-category="experimental">Experimental </button>
             </div>
             
             <!-- Gallery Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
-                <!-- Fanart 1 -->
-                <div class="gallery-item fanarts" data-src="">
+                <!-- Fanarts 1-->
+                <div class="gallery-item fanarts" data-category="fanarts">
                     <img src="" alt="Fanart 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
-                        <p class="text-gray-300 text-sm">Character X</p>
+                        <p class="text-gray-300 text-sm">Title</p>
                     </div>
                 </div>
                 
-                <!-- OC 1 -->
-                <div class="gallery-item ocs" data-src="">
+                <!-- Illustrations 1 -->
+                <div class="gallery-item illustrations" data-category="illustrations">
+                    <img src="" alt="Illustration 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Illustration</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+
+                <!-- OC 1  -->
+                <div class="gallery-item ocs" data-category="ocs">
                     <img src="" alt="Original Character 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
-                        <p class="text-white font-medium">OC</p>
-                        <p class="text-gray-300 text-sm">Aurora</p>
+                        <p class="text-white font-medium">Original Character</p>
+                        <p class="text-gray-300 text-sm">Character Name</p>
                     </div>
                 </div>
-                
-                <!-- Commission 1 -->
-                <div class="gallery-item commissions" data-src="">
-                    <img src="" alt="Commission 1" class="w-full h-auto rounded-lg cursor-pointer">
+
+                <!-- Concept Art 1 -->
+                <div class="gallery-item concept" data-category="concept">
+                    <img src="" alt="Concept 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
-                        <p class="text-white font-medium">Commission</p>
-                        <p class="text-gray-300 text-sm">Client A</p>
+                        <p class="text-white font-medium">Concept Art</p>
+                        <p class="text-gray-300 text-sm">Project</p>
                     </div>
                 </div>
-                
-                <!-- Fanart 2 -->
-                <div class="gallery-item fanarts" data-src="">
-                   <img src="" alt="Fanart 2" class="w-full h-auto rounded-lg cursor-pointer">
-                    <div class="gallery-caption">
-                        <p class="text-white font-medium">Fanart</p>
-                        <p class="text-gray-300 text-sm">Character Y</p>
-                    </div>
-                </div>
-                
-                <!-- OC 2 -->
-                <div class="gallery-item ocs" data-src="">
-                    <img src="" alt="Original Character 2" class="w-full h-auto rounded-lg cursor-pointer">
-                    <div class="gallery-caption">
-                        <p class="text-white font-medium">OC</p>
-                        <p class="text-gray-300 text-sm">Specter</p>
-                    </div>
-                </div>
-                
-                <!-- Commission 2 -->
-                <div class="gallery-item commissions" data-src="">
-                    <img src="" alt="Commission 2" class="w-full h-auto rounded-lg cursor-pointer">
-                    <div class="gallery-caption">
-                        <p class="text-white font-medium">Commission</p>
-                        <p class="text-gray-300 text-sm">Client B</p>
-                    </div>
-                </div>
-                
+
                 <!-- Chibi 1 -->
                 <div class="gallery-item chibi" data-src="">
-                    <img src="" alt="Chibi Character" class="w-full h-auto rounded-lg cursor-pointer">
+                    <img src="" alt="Chibi Character 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Chibi</p>
                         <p class="text-gray-300 text-sm">Cute Character</p>
@@ -777,31 +764,230 @@
                 </div>
                 
                 <!-- NSFW 1 -->
-                <div class="gallery-item nsfw" data-src="https://github.com/user-attachments/assets/74ea298a-7226-40e1-be3d-9ccf47bd9b8d">
+                <div class="gallery-item nsfw" data-category="nsfw">
                     <div class="nsfw-badge">NSFW</div>
-                    <img src="https://github.com/user-attachments/assets/74ea298a-7226-40e1-be3d-9ccf47bd9b8d" alt="NSFW Art" class="w-full h-auto rounded-lg cursor-pointer">
+                    <img src="" alt="NSFW 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
-                        <p class="text-white font-medium">NSFW</p>
-                        <p class="text-gray-300 text-sm">Adult Content</p>
+                        <p class="text-white font-medium">NSFW Art</p>
+                        <p class="text-gray-300 text-sm">Description</p>
                     </div>
                 </div>
                 
-                <!-- Chibi 2 -->
-                <div class="gallery-item chibi" data-src="">
-                    <img src="" alt="Chibi Character 2" class="w-full h-auto rounded-lg cursor-pointer">
+               <!-- Fanarts  2 -->
+                <div class="gallery-item fanarts" data-category="fanarts">
+                    <img src="" alt="Fanart 2" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
-                        <p class="text-white font-medium">Chibi</p>
-                        <p class="text-gray-300 text-sm">Cute Character 2</p>
+                        <p class="text-white font-medium">Fanart</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+
+               <!-- Commissions 1 -->
+                <div class="gallery-item commissions" data-category="commissions">
+                    <img src="" alt="Commission 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Commission</p>
+                        <p class="text-gray-300 text-sm">Client Name</p>
+                    </div>
+                </div>
+
+                <!-- Sketches 1 -->
+                <div class="gallery-item sketches" data-category="sketches">
+                    <img src="" alt="Sketch 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Sketch</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+                
+                <!-- Promo Art 1 -->
+                <div class="gallery-item promo" data-category="promo">
+                    <img src="" alt="Promo 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Promotional Art</p>
+                        <p class="text-gray-300 text-sm">Project</p>
+                    </div>
+                </div>
+                
+                <!-- Illustrations 2 -->
+                <div class="gallery-item illustrations" data-category="illustrations">
+                    <img src="" alt="Illustration 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Illustration</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+
+                <!-- Experimental 1 -->
+                <div class="gallery-item experimental" data-category="experimental">
+                    <img src="" alt="Experimental 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Experimental</p>
+                        <p class="text-gray-300 text-sm">Technique</p>
                     </div>
                 </div>
                 
                 <!-- NSFW 2 -->
-                <div class="gallery-item nsfw" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/teste-de-novo-1/refs/heads/main/026101ef21fccad2191f4425582d7faa_high.png">
+                <div class="gallery-item nsfw" data-category="nsfw">
                     <div class="nsfw-badge">NSFW</div>
-                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/teste-de-novo-1/refs/heads/main/026101ef21fccad2191f4425582d7faa_high.png" alt="NSFW Art 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <img src="" alt="NSFW 2" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
-                        <p class="text-white font-medium">NSFW</p>
-                        <p class="text-gray-300 text-sm">Adult Content 2</p>
+                        <p class="text-white font-medium">NSFW Art</p>
+                        <p class="text-gray-300 text-sm">Description</p>
+                    </div>
+                </div>
+              
+               <!-- OC 2  -->
+                <div class="gallery-item ocs" data-category="ocs">
+                    <img src="" alt="Original Character 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Original Character</p>
+                        <p class="text-gray-300 text-sm">Character Name</p>
+                    </div>
+                </div>
+
+               <!-- Concept Art 2 -->
+                <div class="gallery-item concept" data-category="concept">
+                    <img src="" alt="Concept 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Concept Art</p>
+                        <p class="text-gray-300 text-sm">Project</p>
+                    </div>
+                </div>
+
+               <!-- Fanarts 3-->
+                <div class="gallery-item fanarts" data-category="fanarts">
+                    <img src="" alt="Fanart 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Fanart</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+
+               <!-- Chibi 2 -->
+                <div class="gallery-item chibi" data-src="">
+                    <img src="" alt="Chibi Character 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Chibi</p>
+                        <p class="text-gray-300 text-sm">Cute Character</p>
+                    </div>
+                </div>
+
+               <!-- Commissions 2 -->
+                <div class="gallery-item commissions" data-category="commissions">
+                    <img src="" alt="Commission 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Commission</p>
+                        <p class="text-gray-300 text-sm">Client Name</p>
+                    </div>
+                </div>
+
+               <!-- Illustrations 3 -->
+                <div class="gallery-item illustrations" data-category="illustrations">
+                    <img src="" alt="Illustration 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Illustration</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+
+               <!-- Sketches 2 -->
+                <div class="gallery-item sketches" data-category="sketches">
+                    <img src="" alt="Sketch 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Sketch</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+                
+               <!-- Promo Art 2 -->
+                <div class="gallery-item promo" data-category="promo">
+                    <img src="" alt="Promo 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Promotional Art</p>
+                        <p class="text-gray-300 text-sm">Project</p>
+                    </div>
+                </div>
+
+               <!-- NSFW 3 -->
+                <div class="gallery-item nsfw" data-category="nsfw">
+                    <div class="nsfw-badge">NSFW</div>
+                    <img src="" alt="NSFW 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">NSFW Art</p>
+                        <p class="text-gray-300 text-sm">Description</p>
+                    </div>
+                </div>
+
+                <!-- Concept Art 3 -->
+                <div class="gallery-item concept" data-category="concept">
+                    <img src="" alt="Concept 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Concept Art</p>
+                        <p class="text-gray-300 text-sm">Project</p>
+                    </div>
+                </div>
+
+                <!-- Fanarts 4-->
+                <div class="gallery-item fanarts" data-category="fanarts">
+                    <img src="" alt="Fanart 4" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Fanart</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+
+               <!-- Experimental 2 -->
+                <div class="gallery-item experimental" data-category="experimental">
+                    <img src="" alt="Experimental 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Experimental</p>
+                        <p class="text-gray-300 text-sm">Technique</p>
+                    </div>
+                </div>
+
+               <!-- Illustrations 4 -->
+                <div class="gallery-item illustrations" data-category="illustrations">
+                    <img src="" alt="Illustration 4" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Illustration</p>
+                        <p class="text-gray-300 text-sm">Title</p>
+                    </div>
+                </div>
+
+               <!-- OC 3  -->
+                <div class="gallery-item ocs" data-category="ocs">
+                    <img src="" alt="Original Character 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Original Character</p>
+                        <p class="text-gray-300 text-sm">Character Name</p>
+                    </div>
+                </div>
+
+                <!-- Commissions 3 -->
+                <div class="gallery-item commissions" data-category="commissions">
+                    <img src="" alt="Commission 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Commission</p>
+                        <p class="text-gray-300 text-sm">Client Name</p>
+                    </div>
+                </div>
+
+               <!-- Concept Art 4 -->
+                <div class="gallery-item concept" data-category="concept">
+                    <img src="" alt="Concept 4" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Concept Art</p>
+                        <p class="text-gray-300 text-sm">Project</p>
+                    </div>
+                </div>
+
+               <!-- Experimental 3 -->
+                <div class="gallery-item experimental" data-category="experimental">
+                    <img src="" alt="Experimental 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Experimental</p>
+                        <p class="text-gray-300 text-sm">Technique</p>
                     </div>
                 </div>
             </div>
